@@ -253,10 +253,17 @@ if(INSTALL_PYTHON)
 	DEPENDS protoc
     )
     add_custom_target(python_protobuf ALL DEPENDS python/google)
-    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python/google
-        DESTINATION lib/python3.4/dist-packages
-        COMPONENT protobuf_lib
-    )
+    if(APPLE OR WIN32)
+        install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python/google
+            DESTINATION lib/python3.4/site-packages
+            COMPONENT protobuf_lib
+        )
+    else()
+        install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python/google
+            DESTINATION lib/python3.4/dist-packages
+            COMPONENT protobuf_lib
+        )
+    endif()
 endif()
 
 foreach(file ${PB_HEADER_FILES})
