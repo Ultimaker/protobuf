@@ -7,6 +7,7 @@
 for f in build/*.deb
 do
     echo "Uploading '${f}' to Cloudsmith..."
-    cloudsmith --credentials-file "${CLOUDSMITH_CREDENTIALS_INI}" \
-        push --republish deb "${CLOUDSMITH_DEB_REPO}" "${f}"
+    cloudsmith push deb \
+      --api-key "${CLOUDSMITH_API_KEY}" \
+      --republish "${CLOUDSMITH_DEB_REPO}" "${f}"
 done
