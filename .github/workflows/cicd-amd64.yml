@@ -1,6 +1,14 @@
 ---
 name: CI/CD for amd64 debian package
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - 'cura/**'
+    tags:
+      - 'cura/v**'
+  pull_request:
+    branches:
+      - 'cura/**'
 jobs:
   build:
     name: Build debian package
